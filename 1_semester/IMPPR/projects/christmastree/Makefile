@@ -3,9 +3,9 @@
 # Author:   Rico Ukro, Kesselsdorf, Germany
 
 APP     := christmas_tree
-OBJS    := main.o tree_elements.o
+OBJS    := main.o
 CC      := gcc
-CFLAGS  := -Wall -ansi -pedantic -Wmissing-prototypes -Wstrict-prototypes -Wold-style-definition 
+CFLAGS  := -Wall -ansi -pedantic -Wmissing-prototypes -Wstrict-prototypes -Wold-style-definition -static
 INCLUDE :=
 LIBS    :=
 

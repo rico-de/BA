@@ -1,0 +1,50 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fancyvrb}
+\usepackage{struktex}
+
+\author{Rico Ukro}
+\date{\today{}, Kesselsdorf}
+\title{Documentation Christmas Tree}
+
+\begin{document}
+  \maketitle
+  \thispagestyle{empty}
+  \begin{figure}
+    \centering
+    \begin{BVerbatim}
+      \ /        
+      -X-        
+      /|\
+       A         
+      /X\
+     /XXX\
+    /XoXXX\
+   /XoXX_XX\
+  /XXXXXXOXX\
+ /XoXXX_XXXXX\
+/XoXX*XX_XXXXX\
+      |||      
+    \end{BVerbatim}
+  \end{figure}
+
+  \begin{struktogramm}(90,137)[Structogram]
+    \assign {
+      \begin{declaration}[]
+        \description{\(a, b, c\)}{}
+      \end{declaration}
+    }
+    \case[10]{3}{3}{Signum(x)}{-1}
+    \assign{\(z \gets - \frac{1}{x}\)}
+    \switch{0}
+    \assign{Ausgabe: Division durch 0}
+    \switch[r]{1}
+    \assign{\(z \gets \frac{1}{x}\)} \caseend
+    %\ifthenelse{1}{2}{\(a1e c\)}{j}{n}
+  \end{struktogramm}
+\end{document}

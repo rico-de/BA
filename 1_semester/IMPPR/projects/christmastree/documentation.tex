@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[10pt,a4paper]{article}
 \usepackage[utf8x]{inputenc}
 \usepackage{ucs}
 \usepackage[english]{babel}
@@ -32,19 +32,136 @@
       |||      
     \end{BVerbatim}
   \end{figure}
+  
+  \newpage
+  \section*{Description}
+  \begin{flushleft}
+    This program prints out a randomly generated christmas to the linux terminal. \\
+    It has been tested under Ubuntu 22.04.
+  \end{flushleft}
 
-  \begin{struktogramm}(90,137)[Structogram]
+  \section*{Structograms}
+  \begin{center}
+  \begin{struktogramm}(110,130)[globals]
     \assign {
       \begin{declaration}[]
-        \description{\(a, b, c\)}{}
+        \description{STAR}{star pattern}
+        \description{TRUNK}{trunk pattern}
+        \description{BACKGROUND\textunderscore ELEMENT}{background element char}
+        \description{START\textunderscore CHAR \textunderscore ELEMENT}{tree start element}
+        \description{FILLING\textunderscore ELEMENT}{tree filling element}
+        \description{STOP\textunderscore CHAR \textunderscore ELEMENT}{tree stop element}
+        \description{ORNAMENTS}{holds ornaments}
+        \description{ORNAMENT\textunderscore FREQUENCY}{divider to reduce the random occurrence of ornaments}
+        \description{RED}{string color red}
+        \description{BROWN}{string color brown}
+        \description{YELLOW}{string color yellow}
+        \description{GREEN}{string color green}
+        \description{DARK\textunderscore GREEN}{string color dark green}
+        \description{WHITE}{string color white}
+        \description{X\textunderscore OFFSET}{horizontal tree offset in terminal}
+        \description{Y\textunderscore OFFSET}{vertical tree offset in terminal}
       \end{declaration}
     }
-    \case[10]{3}{3}{Signum(x)}{-1}
-    \assign{\(z \gets - \frac{1}{x}\)}
-    \switch{0}
-    \assign{Ausgabe: Division durch 0}
-    \switch[r]{1}
-    \assign{\(z \gets \frac{1}{x}\)} \caseend
-    %\ifthenelse{1}{2}{\(a1e c\)}{j}{n}
   \end{struktogramm}
+  \end{center}
+  
+  \begin{center}
+  \begin{struktogramm}(110,10)[function max]
+    \sub{uint max (const uint val1, const uint val2) }
+    \return{return val1 \(>\) val2 ? val1 : val2}
+  \end{struktogramm}
+  \end{center}
+
+  \begin{center}
+  \begin{struktogramm}(110,200)[function main] 
+    \assign{set \(top\textunderscore height\) to random value}
+    \assign{calculate \(top\textunderscore width\)}
+    \assign{calculate total \(tree\textunderscore width\)}
+    \assign{calculate total \(tree\textunderscore height\)}
+    \assign{set \(top\textunderscore start\)}
+    \assign{set \(trunk\textunderscore start\)}
+    \assign{allocate memory for \(row\)}
+    \assign{allocate memory for \(last\textunderscore row\)}
+    \assign{set terminal color to \(WHITE\)}
+
+    % print y offset
+    \forallin{for 0 to Y\textunderscore OFFSET}
+      \forallin{for 0 to tree\textunderscore width}
+        \assign{OUTPUT BACKGROUND\textunderscore ELEMENT}
+      \forallinend
+      \assign{OUTPUT new line}
+    \forallinend
+    
+    % print star
+    \forallin{for Y\textunderscore OFFSET to top\textunderscore start}
+      \assign{calculate space\textunderscore count}
+      \forallin{0 to tree\textunderscore width}
+        \ifthenelse{6}{3}
+          {before or after star fields?}{\sTrue}{\sFalse}
+          \assign{OUTPUT BACKGROUND\textunderscore ELEMENT}
+        \change
+          \assign{OUTPUT STAR element}
+        \ifend
+      \forallinend
+      \assign{OUTPUT new line}
+    \forallinend
+    
+    % print top
+    \forallin{for top\textunderscore start to trunk\textunderscore start}
+      \assign{calculate line\textunderscore tree\textunderscore width}
+      \assign{calculate space\textunderscore count}
+      \ifthenelse{6}{2} 
+        {not in first row of top?}{\sTrue}{\sFalse}
+        \assign{last\textunderscore row = row}
+        \change
+      \ifend
+      \forallin{0 to tree\textunderscore width}
+        \assign{OUTPUT colored tree element}
+        \assign{assign tree element to row}
+      \forallinend
+      \assign{OUTPUT new line}
+    \forallinend
+  \end{struktogramm}
+  \end{center}
+  
+  \begin{center}
+  \begin{struktogramm}(110,100)[function main \textit{continued}] 
+    % print trunk
+    \forallin{for trunk\textunderscore start to tree\textunderscore height - Y\textunderscore OFFSET}
+      \assign{calculate space\textunderscore count}
+      \forallin{for 0 to tree\textunderscore width}
+        \ifthenelse{6}{3}
+        {before or after trunk fields?}{\sTrue}{\sFalse}
+          \assign{OUTPUT BACKGROUND\textunderscore ELEMENT}
+        \change
+          \assign{OUTPUT TRUNK element}
+        \ifend
+      \forallinend
+      \assign{OUTPUT new line}
+    \forallinend
+
+    % print y offset
+    \forallin{for tree\textunderscore height - y\textunderscore offset to tree\textunderscore height}
+      \forallin{for 0 to tree\textunderscore width}
+        \assign{OUTPUT BACKGROUND\textunderscore ELEMENT}
+      \forallinend
+      \assign{OUTPUT new line}
+    \forallinend
+    \assign{free allocated memory of row}
+    \assign{free allocated memory of last\textunderscore row}
+  \end{struktogramm}
+  \end{center}
+
+  \section*{Future Improvements}
+  \begin{itemize}
+    \item Animated ornaments in tree
+    \item Add background music 
+    \item Find out, how to get a fancier yellow color for the star
+  \end{itemize}
+  \section*{Personal summary}
+      \begin{flushleft}
+        I learned a lot about programming in ANSI-C. Also this is my first \LaTeX-document. \\
+        Thanks to Professor Hara for this nice exercise.
+      \end{flushleft}
 \end{document}

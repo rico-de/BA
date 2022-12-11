@@ -1,7 +1,7 @@
 #ifndef HANGMAN_LOGO_H
 #define HANGMAN_LOGO_H
 
-char *hangman_logo[] = {
+const char *HANGMAN_LOGO[] = {
 
 "\t\t  ██░ ██  ▄▄▄       ███▄    █   ▄████  ███▄ ▄███▓ ▄▄▄       ███▄    █ ",
 "\t\t ▓██░ ██▒▒████▄     ██ ▀█   █  ██▒ ▀█▒▓██▒▀█▀ ██▒▒████▄     ██ ▀█   █ ",
@@ -15,6 +15,6 @@ char *hangman_logo[] = {
 "\t\t                                                                      "
 };
 
-const unsigned int HANGMAN_LOGO_HEIGHT = sizeof(hangman_logo) / sizeof(hangman_logo[0]);
+const unsigned int LOGO_HEIGHT = sizeof(HANGMAN_LOGO) / sizeof(HANGMAN_LOGO[0]);
 
 #endif /* HANGMAN_LOGO_H */

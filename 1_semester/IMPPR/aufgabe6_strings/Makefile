@@ -1,11 +1,11 @@
-# Info:     Makefile for compiling "hangman" project
+# Info:     Generic Makefile for compiling c ansi sourcecode
 # Version:  1.0
 # Author:   Rico Ukro, Kesselsdorf, Germany
 
-APP     := hangman
-OBJS    := main.o terminal_functions.o fileman.o
+APP     := prog
+OBJS    := main.o
 CC      := gcc
-CFLAGS  := -Wall -ansi -pedantic -Wmissing-prototypes -Wstrict-prototypes -Wold-style-definition -static
+CFLAGS  := -Wall -ansi -pedantic -Wmissing-prototypes -Wstrict-prototypes -Wold-style-definition 
 INCLUDE :=
 LIBS    :=
 

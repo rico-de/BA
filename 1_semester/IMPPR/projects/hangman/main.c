@@ -1,7 +1,8 @@
 /*
  *  File:         main.c 
- *  Version:      0.1
+ *  Version:      0.7
  *  Author:       Rico Ukro, Kesselsdorf, Germany
+ *  Tools:        tmux, vim, gcc, make
  *  Description:
  */ 
 
@@ -10,14 +11,12 @@
 #include <stdlib.h> /* exit */
 #include <string.h> /* strlen */
 
+#include "error_handling.h"
 #include "hangman_logo.h"
 #include "terminal_functions.h"
 #include "fileman.h"
 #include "gameengine.h"
 
-#define DIC_NOT_FOUND_ERR -10
-#define LIST_ERR -11
-#define USER_INPUT_ERR -20
 
 /* prints out the starting screen */
 void start_screen(void);
@@ -25,11 +24,10 @@ void start_screen(void);
 /* select the language out of the available dictionary files */
 char *select_lang(void);
 
-void malloc_error(void);
-
+/* main */
 int main(int argc, char **argv) {
   char *word;
-/*  start_screen(); */
+  start_screen();
   word = get_word(select_lang()); 
 
   sleep(1);
@@ -57,8 +55,7 @@ char *select_lang(void) {
   unsigned int file_count;
   file = get_dic();
   if (!file) {
-    fprintf(stderr, "No dictionary file found, Call hangman --help. Exiting...\n");
-    exit(DIC_NOT_FOUND_ERR);
+    dic_not_found_error();
   }
 
   file_begin = file;
@@ -84,8 +81,7 @@ char *select_lang(void) {
     if (!scanf("%u", &input) || input > file_count) {
       printf("Entered number is not valid!\n");
       if (i == 2) {
-        fprintf(stderr, "Got to often wrong input. Exiting...\n");
-        exit(USER_INPUT_ERR);
+        user_input_error();
       }
     } else {
       break;
@@ -98,8 +94,7 @@ char *select_lang(void) {
     }
     file = file->next;
   }
-  fprintf(stderr, "Error in list. Exiting...\n");
-  exit(LIST_ERR);
+  list_error();
   /* Satisfy compiler, shouldn't be reached */
   return NULL;
 }

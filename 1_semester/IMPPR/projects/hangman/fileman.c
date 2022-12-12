@@ -6,14 +6,10 @@
 #include <stdlib.h> /* malloc, free */
 #include <stdlib.h> /* srand, rand */
 #include <time.h> /* time */
+#include "error_handling.h"
 
-#define MALLOC_ERR -1
-#define FOPEN_ERR -11
-#define LINE_LENGTH_ERR -12
-#define FILE_SYNTAX_ERR -13
 
 #define BUFFER_LEN 256
-
 
 
 int is_dic_file(const char *filename) {
@@ -33,6 +29,8 @@ struct dic_file* get_dic(void) {
 
   pos_count = 0;
   file = malloc(sizeof(struct dic_file));
+  if (!file)
+    malloc_error();
   file_begin = file;
   file->name = NULL;
   file->next = NULL;
@@ -48,6 +46,8 @@ struct dic_file* get_dic(void) {
       if (file->name != NULL) {
         /* create new dic_file list entry */
         file->next = malloc(sizeof(struct dic_file));   
+        if (!file->next)
+          malloc_error();
         file->next->prev = file;
         file->next->next = NULL;
         file = file->next;
@@ -55,10 +55,14 @@ struct dic_file* get_dic(void) {
         /* set filename of newly created list entry */
         file->pos = pos_count++;
         file->name = malloc(strlen(dir->d_name) + 1);
+        if (!file->name)
+          malloc_error();
         strcpy(file->name, dir->d_name);
       } else { /* if first list element */
         file->pos = pos_count++;
         file->name = malloc(strlen(dir->d_name) + 1);
+        if (!file->name)
+          malloc_error();
         strcpy(file->name, dir->d_name);
       }
     }
@@ -78,15 +82,14 @@ char *get_word(const char *filename) {
   rand_line_num = get_line_count(filename);
   
   if (!rand_line_num) {
-    fprintf(stderr, "Language file %s is empty. Exiting...\n", filename);
-    exit(FILE_SYNTAX_ERR);
+    empty_file_error(filename);
   }
   rand_line_num = rand() % rand_line_num;
 
   /* open file as read only */
   fp = fopen(filename, "r");
-  if (!fp) { fprintf(stderr, "Error opening file %s. Exiting...\n", filename);
-    exit(FOPEN_ERR);
+  if (!fp) { 
+    fopen_error(filename);
   }
   
   /* read file char by char and file buffer */
@@ -94,20 +97,18 @@ char *get_word(const char *filename) {
     static size_t i = 0;
     if (c_temp != '\n' && c_temp != '\r') {
       if (i >= BUFFER_LEN - 1) {
-        fprintf(stderr, "Line in dictionary file is to long. Exiting...\n");
         fclose(fp);
         fp = NULL;
-        exit(LINE_LENGTH_ERR);
+        line_length_error(filename);
       }
       /* check for only alpha letters in the current buffer */
-      if (!(c_temp >= 'A' && c_temp <= 'Z' || c_temp >= 'a' && c_temp <= 'z')) {
-        fprintf(stderr, "Non alpha letters in language file %s. (View \"hangman help\" for more infos). Exiting...\n", filename);
+      if (!((c_temp >= 'A' && c_temp <= 'Z') || (c_temp >= 'a' && c_temp <= 'z'))) {
         fclose(fp);
         fp = NULL;
-        exit(FILE_SYNTAX_ERR);
+        file_syntax_error(filename);
       }
         
-      /* make letter uppercase and put into buffer */
+      /* change letter to uppercase and put into buffer */
       buffer[i++] = (c_temp >= 'a' ? c_temp - 'a' + 'A' : c_temp);
     } else if (c_temp == '\n') {
       buffer[i] = '\0';
@@ -139,8 +140,8 @@ unsigned int get_line_count(const char *filename) {
   char c_temp;
 
   fp = fopen(filename, "r");
-  if (!fp) { fprintf(stderr, "Error opening file %s filename. Exiting...\n", filename);
-    exit(FOPEN_ERR);
+  if (!fp) { 
+    fopen_error(filename);
   }
 
   /* get number of rows in file */
@@ -154,7 +155,3 @@ unsigned int get_line_count(const char *filename) {
   return line_count;
 }
 
-void malloc_error(void) {
-  fprintf(stderr, "Couldn't allocate memory. Exiting...\n");
-  exit(MALLOC_ERR);
-}

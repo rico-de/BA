@@ -3,7 +3,7 @@
 # Author:   Rico Ukro, Kesselsdorf, Germany
 
 APP     := hangman
-OBJS    := main.o terminal_functions.o fileman.o gameengine.o
+OBJS    := main.o error_handling.o terminal_functions.o fileman.o gameengine.o
 CC      := gcc
 CFLAGS  := -Wall -ansi -pedantic -Wmissing-prototypes -Wstrict-prototypes -Wold-style-definition -static
 INCLUDE :=

@@ -22,7 +22,5 @@ char *get_word(const char *filename);
 /* returns the number of lines in file filename */
 unsigned int get_line_count(const char *filename);
 
-/* call in case of malloc err */
-void malloc_error(void);
 
 #endif /* FILEMAN_H */

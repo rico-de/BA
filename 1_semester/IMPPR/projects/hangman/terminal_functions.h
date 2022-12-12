@@ -11,6 +11,9 @@ void set_default_color(void);
 /* set terminal color to red */
 void set_red(void); 
 
+/* set terminal color to green */
+void set_green(void);
+
 /* prints out an 2d char array, row by row delayed by DELAY_MS */
 void print_v_delayed(const char **ARR, const unsigned int HEIGHT, const unsigned int DELAY_MS); 
 

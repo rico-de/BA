@@ -4,9 +4,14 @@
 
 
 const char RED[] = "\033[0;31m";
+const char DEFAULT_COLOR[] = "\e[m";
 
 void clear_terminal(void) {
   printf("\e[1;1H\e[2J");
+}
+
+void set_default_color(void) {
+  printf("%s", DEFAULT_COLOR);
 }
 
 void set_red(void) {

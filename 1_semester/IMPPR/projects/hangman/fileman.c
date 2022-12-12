@@ -92,19 +92,30 @@ char *get_word(const char *filename) {
   /* read file char by char and file buffer */
   for (c_temp = fgetc(fp); c_temp != EOF; c_temp = fgetc(fp)) {
     static size_t i = 0;
-    if (c_temp != '\n') {
+    if (c_temp != '\n' && c_temp != '\r') {
       if (i >= BUFFER_LEN - 1) {
         fprintf(stderr, "Line in dictionary file is to long. Exiting...\n");
         fclose(fp);
+        fp = NULL;
         exit(LINE_LENGTH_ERR);
       }
-      buffer[i++] = c_temp;
-    } else {
+      /* check for only alpha letters in the current buffer */
+      if (!(c_temp >= 'A' && c_temp <= 'Z' || c_temp >= 'a' && c_temp <= 'z')) {
+        fprintf(stderr, "Non alpha letters in language file %s. (View \"hangman help\" for more infos). Exiting...\n", filename);
+        fclose(fp);
+        fp = NULL;
+        exit(FILE_SYNTAX_ERR);
+      }
+        
+      /* make letter uppercase and put into buffer */
+      buffer[i++] = (c_temp >= 'a' ? c_temp - 'a' + 'A' : c_temp);
+    } else if (c_temp == '\n') {
       buffer[i] = '\0';
       if (rand_line_num == 0) {
         char *ret_str = malloc(strlen(buffer) - 1);
         if (!ret_str) {
           fclose(fp);
+          fp = NULL;
           malloc_error();
         }
         strcpy(ret_str, buffer);
@@ -118,6 +129,7 @@ char *get_word(const char *filename) {
   }
 
   fclose(fp);
+  fp = NULL;
   return NULL;
 }
 
@@ -138,6 +150,7 @@ unsigned int get_line_count(const char *filename) {
   }
 
   fclose(fp);
+  fp = NULL;
   return line_count;
 }
 

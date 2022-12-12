@@ -13,6 +13,7 @@
 #include "hangman_logo.h"
 #include "terminal_functions.h"
 #include "fileman.h"
+#include "gameengine.h"
 
 #define DIC_NOT_FOUND_ERR -10
 #define LIST_ERR -11
@@ -28,10 +29,11 @@ void malloc_error(void);
 
 int main(int argc, char **argv) {
   char *word;
-  /* start_screen(); */
-  word = get_word(select_lang());
-  printf("%s\n", word);
-  /* TODO: draw hangman */
+/*  start_screen(); */
+  word = get_word(select_lang()); 
+
+  sleep(1);
+  gameloop(word);
   
   free(word);
   return 0;
@@ -45,6 +47,7 @@ void start_screen(void) {
   usleep(1000 * 1000);
   set_red();
   print_v_delayed(HANGMAN_LOGO, LOGO_HEIGHT, 300);
+  set_default_color(); 
 }
 
 char *select_lang(void) {

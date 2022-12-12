@@ -5,6 +5,9 @@
 /* clears the actual stdin */
 void clear_terminal(void); 
 
+/* set terminal color to default */
+void set_default_color(void); 
+
 /* set terminal color to red */
 void set_red(void); 
 

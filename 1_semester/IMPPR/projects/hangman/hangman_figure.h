@@ -10,7 +10,7 @@
 const char FIGURE[FIGURE_STATES][FIGURE_HEIGHT][FIGURE_WIDTH] = {
   /* state 0 */
 {
-"0  ___________.._______    ",
+"   ___________.._______    ",
 "| .__________))______|     ",
 "| | / /      ||            ",
 "| |/ /       ||            ",
@@ -36,7 +36,7 @@ const char FIGURE[FIGURE_STATES][FIGURE_HEIGHT][FIGURE_WIDTH] = {
 },
   /* state 1 */
 {
-"1  ___________.._______    ",
+"   ___________.._______    ",
 "| .__________))______|     ",
 "| | / /      ||            ",
 "| |/ /       ||            ",
@@ -62,7 +62,7 @@ const char FIGURE[FIGURE_STATES][FIGURE_HEIGHT][FIGURE_WIDTH] = {
 },
   /* state 2 */
 {
-"2  ___________.._______    ",
+"   ___________.._______    ",
 "| .__________))______|     ",
 "| | / /      ||            ",
 "| |/ /       ||            ",
@@ -88,7 +88,7 @@ const char FIGURE[FIGURE_STATES][FIGURE_HEIGHT][FIGURE_WIDTH] = {
 },
   /* state 3 */
 {
-"3  ___________.._______    ",
+"   ___________.._______    ",
 "| .__________))______|     ",
 "| | / /      ||            ",
 "| |/ /       ||            ",
@@ -114,7 +114,7 @@ const char FIGURE[FIGURE_STATES][FIGURE_HEIGHT][FIGURE_WIDTH] = {
 },
   /* state 4 */
 {
-"4  ___________.._______    ",
+"   ___________.._______    ",
 "| .__________))______|     ",
 "| | / /      ||            ",
 "| |/ /       ||            ",
@@ -140,7 +140,7 @@ const char FIGURE[FIGURE_STATES][FIGURE_HEIGHT][FIGURE_WIDTH] = {
 },
   /* state 5 */
 {
-"5  ___________.._______    ",
+"   ___________.._______    ",
 "| .__________))______|     ",
 "| | / /      ||            ",
 "| |/ /       ||            ",
@@ -166,7 +166,7 @@ const char FIGURE[FIGURE_STATES][FIGURE_HEIGHT][FIGURE_WIDTH] = {
 },
   /* state 6 */
 {
-"6  ___________.._______    ",
+"   ___________.._______    ",
 "| .__________))______|     ",
 "| | / /      ||            ",
 "| |/ /       ||            ",
@@ -192,7 +192,7 @@ const char FIGURE[FIGURE_STATES][FIGURE_HEIGHT][FIGURE_WIDTH] = {
 },
   /* state 7 */
 {
-"7  ___________.._______    ",
+"   ___________.._______    ",
 "| .__________))______|     ",
 "| | / /      ||            ",
 "| |/ /       ||            ",

@@ -2,7 +2,7 @@
 #define TERMINAL_FUNCTIONS_H
 
 
-/* clears the actual stdin */
+/* clears the actual stdout */
 void clear_terminal(void); 
 
 /* set terminal color to default */

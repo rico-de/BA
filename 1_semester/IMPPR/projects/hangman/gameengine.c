@@ -1,6 +1,5 @@
 #include "gameengine.h"
-
-#include <stdio.h> /* printf */
+#include <stdio.h>  /* printf */
 #include <unistd.h> /* sleep */
 #include <string.h> /* strlen */
 #include "error_handling.h"
@@ -14,7 +13,7 @@ void print_figure(const size_t state, const char* word, const char* searched_wor
 /* check searched_word contains letter */
 int word_contains_letter(const char letter, const char* searched_word);
 
-/* holds the not correct input letters */
+/* holds the failed input letters */
 unsigned int wrong_letters['z' - 'a' + 1];
 
 /* puts the input char into the guessed word */
@@ -43,6 +42,7 @@ void gameloop(const char* searched_word) {
     wrong_letters[i] = 0;
   }
 
+  /* start the game loop */
   while (1) {
     clear_terminal();
     print_figure(state, guessed_word, NULL);
@@ -93,9 +93,6 @@ void gameloop(const char* searched_word) {
     }
     fflush(stdout);
     sleep(1);
-
-    /* state = state < FIGURE_STATES - 1 ? state + 1 : 0;
-    sleep(1); */
   }
 
   free(guessed_word);
@@ -106,9 +103,10 @@ void print_figure(const size_t state, const char* word, const char* searched_wor
   unsigned int word_len;
   if (word)
     word_len = strlen(word);
-
+  /* print hangman figure row by row */
   for (i = 0; i < FIGURE_HEIGHT; i++) {
     printf("%s", FIGURE[state][i]); 
+    /* sideinfos */
     if (i == FIGURE_HEIGHT / 2 - 1) {
       printf("\t");
       if (word && !searched_word) {
@@ -125,7 +123,7 @@ void print_figure(const size_t state, const char* word, const char* searched_wor
         set_default_color();
       } else if (word && searched_word) {
         set_green();
-        printf("You won! The word is ");
+        printf("You've won! The word is ");
         set_default_color();
       }
     } else if (i == FIGURE_HEIGHT / 2 + 1 && searched_word) {

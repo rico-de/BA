@@ -2,7 +2,7 @@
 #define FILEMAN_H
 
 
-/* holds the filenames of all dictionaries in current dir */
+/* node struct for the double linked list, that holds the filenames of all dictionaries in current dir */
 struct dic_file{
   unsigned int pos;
   char *name;

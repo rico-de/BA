@@ -1,11 +1,11 @@
 #include "fileman.h"
 
 #include <dirent.h> /* opendir/readdir/closedir */
-#include <stdio.h> /* printf */
+#include <stdio.h>  /* printf */
 #include <string.h> /* strcmp, strlen */
 #include <stdlib.h> /* malloc, free */
 #include <stdlib.h> /* srand, rand */
-#include <time.h> /* time */
+#include <time.h>   /* time */
 #include "error_handling.h"
 
 
@@ -28,6 +28,7 @@ struct dic_file* get_dic(void) {
   struct dirent *dir;
 
   pos_count = 0;
+  /* allocate memory for first node */
   file = malloc(sizeof(struct dic_file));
   if (!file)
     malloc_error();
@@ -42,9 +43,9 @@ struct dic_file* get_dic(void) {
       /* if file is not a .dic file skip */
       if (!is_dic_file(dir->d_name)) 
         continue;
-      /* append list item if it is not the first */
+      /* append node if it is not the first */
       if (file->name != NULL) {
-        /* create new dic_file list entry */
+        /* create new node */
         file->next = malloc(sizeof(struct dic_file));   
         if (!file->next)
           malloc_error();
@@ -52,7 +53,7 @@ struct dic_file* get_dic(void) {
         file->next->next = NULL;
         file = file->next;
         
-        /* set filename of newly created list entry */
+        /* set filename of newly created node */
         file->pos = pos_count++;
         file->name = malloc(strlen(dir->d_name) + 1);
         if (!file->name)
@@ -103,9 +104,7 @@ char *get_word(const char *filename) {
       }
       /* check for only alpha letters in the current buffer */
       if (!((c_temp >= 'A' && c_temp <= 'Z') || (c_temp >= 'a' && c_temp <= 'z'))) {
-        fclose(fp);
-        fp = NULL;
-        file_syntax_error(filename);
+        continue;
       }
         
       /* change letter to uppercase and put into buffer */

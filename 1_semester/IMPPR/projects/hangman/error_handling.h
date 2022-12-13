@@ -1,6 +1,7 @@
 #ifndef ERROR_HANDLING_H
 #define ERROR_HANDLING_H
 
+/* functions for miscellanious error situations */
 
 void dic_not_found_error(void);
 

@@ -13,7 +13,7 @@ const int FILE_SYNTAX_ERR = -13;
 const int EMPTY_FILE_ERR = -14;
 
 void dic_not_found_error(void) {
-  fprintf(stderr, "No dictionary file found, Call hangman --help. Exiting...\n");
+  fprintf(stderr, "No dictionary file found, call 'hangman help' for more infos. Exiting...\n");
   exit(DIC_NOT_FOUND_ERR);
 }
 
@@ -48,6 +48,6 @@ void line_length_error(const char* filename) {
 }
 
 void file_syntax_error(const char* filename) {
-  fprintf(stderr, "Non alpha letters in language file %s. (View \"hangman help\" for more infos). Exiting...\n", filename);
+  fprintf(stderr, "Non alpha letters in language file %s, call 'hangman help' for more infos. Exiting...\n", filename);
   exit(FILE_SYNTAX_ERR);
 }

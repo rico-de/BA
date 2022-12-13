@@ -1,5 +1,5 @@
 #include "terminal_functions.h"
-#include <stdio.h> /* printf/fflush */
+#include <stdio.h>  /* printf/fflush */
 #include <unistd.h> /* sleep/usleep */
 
 
@@ -23,6 +23,7 @@ void set_red(void) {
 void set_green(void) {
   printf("%s", GREEN);
 }
+
 void print_v_delayed(const char **ARR, const unsigned int HEIGHT, const unsigned int DELAY_MS) { 
   size_t i;
   for (i = 0; i < HEIGHT; i++) {

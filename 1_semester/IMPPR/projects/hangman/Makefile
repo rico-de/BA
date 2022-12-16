@@ -5,7 +5,7 @@
 APP     := hangman
 OBJS    := main.o error_handling.o terminal_functions.o fileman.o gameengine.o
 CC      := gcc
-CFLAGS  := -Wall -ansi -pedantic -Wmissing-prototypes -Wstrict-prototypes -Wold-style-definition -static
+CFLAGS  := -Wall -ansi -pedantic -Wmissing-prototypes -Wstrict-prototypes -Wold-style-definition
 INCLUDE :=
 LIBS    :=
 

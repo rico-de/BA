@@ -1,6 +1,6 @@
 /*
  *  File:         main.c 
- *  Version:      1.1
+ *  Version:      1.2
  *  Author:       Rico Ukro, Kesselsdorf, Germany
  *  Tools:        tmux, vim, gcc, make
  *  Description:  Classic hangman game, with custom configurable dictionaries.
